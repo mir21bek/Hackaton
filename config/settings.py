@@ -21,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-r_7yyoosz3%17*so3fgfl&=70!(sj_%kv(#=0mib0w+z%qj^=y'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['db','157.230.190.109','157.230.190.109:8000','*']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 
     'users.apps.UsersConfig',
+    'menu.apps.MenuConfig',
 ]
 
 MIDDLEWARE = [
@@ -83,8 +84,36 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
+    'postgres': {
+        'NAME': config('POSTGRES_DB'),
+        'USER': config('POSTGRES_USER'),
+        'PASSWORD': config('POSTGRES_PASSWORD'),
+        'HOST': config('POSTGRES_HOST'),
+        'PORT': config('POSTGRES_PORT')
+    },
 }
+
+SPECTACULAR_SETTINGS = {
+    'TITILE': "BLOG APIS",
+    'DESCRIPTION': "Simple blog app in rest framework",
+    'VERSION': "1.0",
+
+}
+
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS",
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://157.230.190.109:8000",
+    "http://localhost:3000",
+]
 
 
 # Password validation

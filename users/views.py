@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import ensure_csrf_cookie
 
+from .models import User
 from .serializers import CustomUserSerializer, LoginSerializer
 
 
@@ -56,6 +57,7 @@ class LoginView(generics.GenericAPIView):
         else:
             return Response({'detail': 'Invalid input. Both email and password are required.'},
                             status=status.HTTP_400_BAD_REQUEST)
+
 
 class LogoutView(generics.GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
