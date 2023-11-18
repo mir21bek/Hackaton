@@ -1,9 +1,8 @@
 from rest_framework import generics, permissions, viewsets
 from rest_framework.generics import get_object_or_404
 
-from .models import Category, Menu, ExtraItem
-from .serializers import CategorySerializer, MenuSerializer, ExtraItemSerializer
-from .signals import post_category_save, post_menu_save
+from .models import Category, Menu
+from .serializers import CategorySerializer, MenuSerializer
 
 
 class CategoryApiView(generics.ListAPIView):
@@ -66,8 +65,3 @@ class MenuCreateUpdateApiView(viewsets.ModelViewSet):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
     permission_classes = [permissions.IsAdminUser]
-
-    def perform_create(self, serializer):
-        """Метод для создания нового блюда и вызова сигнала после успешного создания."""
-        menu_instance = serializer.save()
-        post_menu_save(sender=Menu, instance=menu_instance, created=True)

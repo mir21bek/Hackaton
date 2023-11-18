@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework.authtoken',
+    'drf_yasg',
 
     'users.apps.UsersConfig',
     'menu.apps.MenuConfig',
@@ -218,4 +219,10 @@ SIMPLE_JWT = {
     "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
+}
+
+
+SWAGGER_SETTINGS = {
+    'VALIDATOR_URL': 'http://localhost:8189',
+
 }
